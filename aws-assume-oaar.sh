@@ -38,7 +38,7 @@ if [[ "$1" == "" || "$2" == "" || "$3" == "" || "$4" == "" ]]; then
 	fi
 
 	echo "Usage:"
-	echo "    . ${BASH_SOURCE[0]} aws-account-id payer-profile payer-username payer-mfa-token"
+	echo "    . ${BASH_SOURCE[0]} aws-account-id payer-profile payer-username payer-mfa-token [override-role]"
 	echo "        Assumes the OrganizationAccountAccessRole"
 	echo ""
 	echo "    . ${BASH_SOURCE[0]} --logout"
@@ -53,6 +53,16 @@ else
 	PAYER_PROFILE=$2
 	PAYER_USER=$3
 	TOKEN_CODE=$4
+	
+	if [[ "$5" == "" ]]; then
+
+		ROLE="OrganizationAccountAccessRole"
+
+	else
+
+		ROLE=$5
+
+	fi
 
 fi
 
@@ -95,7 +105,7 @@ fi
 
 ## Assume role using MFA token
 CRED_JSON=$(aws sts assume-role \
-	--role-arn arn:aws:iam::$ACCT_ID:role/OrganizationAccountAccessRole \
+	--role-arn arn:aws:iam::$ACCT_ID:role/$ROLE \
 	--role-session-name $PAYER_USER \
 	--serial-number $MFA_SERIAL \
 	--token-code $TOKEN_CODE \
@@ -115,6 +125,8 @@ export AWS_SECRET_ACCESS_KEY=$(jq -r ".Credentials.SecretAccessKey" <<< $CRED_JS
 export AWS_SESSION_TOKEN=$(jq -r ".Credentials.SessionToken" <<< $CRED_JSON)
 
 CRED_EXPIRATION=$(date -d $(jq -r ".Credentials.Expiration" <<< $CRED_JSON))
+CRED_ARN=$(jq -r ".AssumedRoleUser.Arn" <<< $CRED_JSON)
 echo "Credentials added to environment, and expire $CRED_EXPIRATION."
+echo "Assumed role ARN: $CRED_ARN"
 
 return 0 2> /dev/null; exit 0
