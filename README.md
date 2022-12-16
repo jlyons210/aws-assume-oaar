@@ -29,6 +29,9 @@ $ . aws-assume-oaar.sh mycoolawsaccount mycoolmgmtaccount jeremy 123456
 Searching account named 'mycoolawsaccount'... found 123456789012.
 Credentials added to environment, and expire Fri Dec 16 13:27:17 CST 2022.
 Assumed role ARN: arn:aws:sts::123456789012:assumed-role/OrganizationAccountAccessRole/jeremy
+
+$ . aws-assume-oaar.sh --logout
+Cleared credentials from environment.
 ```
 
 ## TODO:
