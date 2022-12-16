@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+## Check dependencies
+if ! ./util-check-dependency.sh date jq aws; then
+
+	return 1 2> /dev/null; exit 1;
+
+fi
+
 ## 'source' is required for script to set shell environment variables
 case "${0##*/}" in dash|-dash|bash|-bash|ksh|-ksh|sh|-sh)
 	;;
