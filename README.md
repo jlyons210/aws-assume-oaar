@@ -4,11 +4,11 @@ Simplifies assuming the AWS OrganizationAccountAccessRole (default) or a provide
 
 ```
 Usage:
-    . aws-assume-oaar.sh aws-account-id payer-profile payer-username payer-mfa-token [override-role]
-        Assumes the OrganizationAccountAccessRole
+. aws-assume-oaar.sh aws-account-id payer-profile payer-username payer-mfa-token [override-role]
+    Assumes the OrganizationAccountAccessRole
 
-    . aws-assume-oaar.sh --logout
-        Clears credentials from local environment
+. aws-assume-oaar.sh --logout
+    Clears credentials from local environment
 ```
 
 ## TODO:
