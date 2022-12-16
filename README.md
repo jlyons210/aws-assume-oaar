@@ -1,6 +1,6 @@
 # aws-assume-oaar
 
-Simplifies assuming the AWS OrganizationAccountAccessRole assuming an awscli profile exists with Organization read permissions.
+Simplifies assuming the AWS OrganizationAccountAccessRole. Depends on a locally configured awscli profile with Organization read permissions.
 
 ## TODO:
 - [ ] Add dependency check for 'jq'
