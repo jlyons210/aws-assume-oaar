@@ -15,7 +15,7 @@ $ . aws-assume-oaar.sh --logout
 ## Example commands and outputs:
 
 ```
-$ . aws-assume-oaar.sh 123456789012 jlyons210-awspayer jeremy 123456 S3ReadOnlyRole
+$ . aws-assume-oaar.sh 123456789012 mycoolmgmtaccount jeremy 123456 S3ReadOnlyRole
 Using provided account ID '123456789012'
 Credentials added to environment, and expire Fri Dec 16 13:37:14 CST 2022.
 Assumed role ARN: arn:aws:sts::123456789012:assumed-role/S3ReadOnlyRole/jeremy
